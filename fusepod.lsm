@@ -1,0 +1,14 @@
+Begin3
+Title:          fusepod
+Version:        0.5
+Entered-date:   14 Apr 06
+Description:    iPod virtual filesystem
+Keywords:       ipod fuse filesystem mp3
+Author:         Keegan Carruthers-Smith <keegan.csmith@gmail.com>
+Maintained-by:  Keegan Carruthers-Smith <keegan.csmith@gmail.com>
+Primary-site:	http://fusepod.sourceforge.net/
+Home-page:      http://fusepod.sourceforge.net/
+Original-site:  http://fusepod.sourceforge.net/
+Platforms:      Linux
+Copying-policy: GNU Public License
+End

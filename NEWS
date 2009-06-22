@@ -1,0 +1,31 @@
+See ChangeLog for more info
+
+What's new in 0.5:
+    * Transparent copying of files onto iPod
+    * Tracks have tags in extended attributes
+    * Unicode tags seem to work now (UTF-8)
+    * iPod finder is now aware if there is more than one iPod already
+      mounted
+    * Ported too libgpod and taglib for future improvements
+    * FUSEPod can also use the environment variable IPOD_MOUNTPOINT
+    * General fixes and polish
+
+What's new in 0.4:
+    * Can create the iTunesDB for you, so you don't have to run iTunes
+      to setup the required files/directories
+    * Playlist removal
+    * A script for recursively adding files and directories to the iPod
+    * ./sync_ipod.sh now can give status on what it is doing (-watch)
+    * A statistics file
+    * General fixes and polish
+
+What's new in 0.3:
+    * Playlists
+    * You can remove tracks
+    * General fixes
+
+What's new in 0.2:
+    * Write support
+    * You can configure the layout with the attribute %e for the extension
+    * FUSEPod now implements the statfs command, so you should be able to
+      the amount of free space through the command df

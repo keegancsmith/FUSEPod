@@ -1,0 +1,156 @@
+2007-07-02    <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Fixed st_nlink problem, which intern fixes samba problems.
+
+2007-02-06    <keegan.csmith@gmail.com>
+
+	* src/fusepod_ipod.cpp: Fix so that it compiles against libgpod 0.4. Thanks to Todd Zullinger
+
+2006-08-07    <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Fixed crash in autodetecting.
+
+2006-07-03    <keegan.csmith@gmail.com>
+
+	* src/fusepod_ipod.cpp: Adds orphaned files to the iTunesDB on startup
+
+2006-06-30    <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: When copying a file into the transfer directory it will updates the filesystem
+	at the same time.
+
+2006-06-29    <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Added more extended attributes.
+
+2006-06-26    <keegan.csmith@gmail.com>
+
+	* src/fusepod_ipod.cpp: iPod finder is now aware if there is more than one iPod already mounted
+
+	* src/fusepod.cpp: Removes empty directories in Transfer dir after sync
+
+2006-06-24    <keegan.csmith@gmail.com>
+
+	* src/fusepod_ipod.cpp: Added the iPod's name to statistics
+	Removed master playlist from Playlist Count
+	If reading /proc/mounts fails, tries to read /etc/mtab
+
+	* src/fusepod.cpp: Fixed bug with getenv("HOME") when reading config files. 
+	Allows IPOD_MOUNTPOINT variable if IPOD_DIR is not specified. (GTKPod uses IPOD_MOUNTPOINT)
+	Tracks have extended attributes showing their tags
+
+2006-06-22    <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Cleaned up fusepod_read()
+
+2006-06-21    <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Fixed tiny memory leak in fusepod_init()
+	Implemented transparent copying of files.
+
+2006-06-20    <keegan.csmith@gmail.com>
+
+	* configure.ac: Made files autoconf pulled in smaller, reducing dist size by 3!
+	Also switched too using bzip2
+
+2006-06-16    <keegan.csmith@gmail.com>
+
+	* src/fusepod_ipod.cpp: Fixed some bugs.
+
+2006-06-15    <keegan.csmith@gmail.com>
+
+	* configure.ac: Bumped version upto 0.5
+	Made configure check for libgpod and taglib
+
+	* src/fusepod_ipod.cpp: Ported fusepod to libgpod
+
+2006-06-11    <keegan.csmith@gmail.com>
+
+	* man/fusepod.1, README: Updated documentation
+
+2006-06-08    <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Added add_files.sh, which enables you to add files and directories recursively.
+	Bug fixes.
+	Added -watch flag to sync_ipod.sh
+
+	* src/fusepod_ipod.cpp:	Added method for iPod statistics
+
+2006-06-03    <keegan.csmith@gmail.com>
+
+	* src/fusepod_ipod.cpp: Does not show hidden playlists now.
+	Removal of playlists is now supported.
+	Checks if you have write access before deleting a song.
+	Can create iTunesDB directory structure.
+
+	* src/ipod/ipod_track_from_mp3.c (ipod_mp3_scan_frames): Stopped libipod
+	from dividing by 0 with bad mp3 tags
+
+	* src/fusepod.cpp (main): Made startup error more verbose.
+	Prompts user wether to create the iTunesDB directory structure if it doesn't exist.
+
+2006-04-14  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* configure.ac: Bumped version upto 0.4
+
+2006-04-10  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Cleaned up some return errors.
+
+	* src/fusepod_ipod.cpp: Fixed a memory leak. Improved
+	song removing code.
+
+2006-04-09  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Syncing now updates virtual filesystem.
+
+	* src/fusepod_ipod.cpp: Changed delete method for Node class
+	so that it doesn't delete it's parents, just children.
+
+2006-04-08  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* src/fusepod_ipod.cpp: Added ability to view playlists.
+
+	* src/fusepod_ipod.cpp: Added ability to remove tracks from
+	the iPod.
+
+	* configure.ac: Bumped version upto 0.3
+
+2006-02-28  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* man/fusepod.1, README: Updated documentation.
+
+2006-02-26  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp (main): Fixed subtle bug of program freezing 
+	when not finding iPod.
+
+2006-02-25  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Implemented add_song support.
+
+	* src/fusepod.cpp: Implemented iPod syncing script
+
+	* src/fusepod_ipod.cpp: Added %e (Extension) to configuration
+	
+2006-02-22  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Added statfs operation
+
+	* configure.ac: Bumped version upto 0.2
+
+2006-02-19  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* src/ipod/: libipod now comes distributed with FUSEPod
+
+	* configure.ac: Converted project to autoconf and automake
+
+	* src/fusepod_ipod.cpp: Added configurable directory layout
+
+2006-02-13  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* src/fusepod.cpp: Created FUSE glue
+
+2006-02-12  Keegan Carruthers-Smith <keegan.csmith@gmail.com>
+
+	* src/fusepod_ipod.cpp, src/fusepod_ipod.h: Created interface to libipod

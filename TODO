@@ -1,0 +1,37 @@
+TODO File for FUSEPod
+ * = TODO
+ + = DONE
+
+ + Unicode (utf-8)
+   * Fix crash when copying unicode files into transfer directory
+ * Better Playlists Support
+   * Creating
+   + Removing
+   * Configurable Layout
+ * Transparent copying of mp3s
+   + Short-term: In transfer folder
+   * Mid-term: Anywhere
+   + Mid-term: Auto-updating filesystem
+   * Copying files into certian folders updates tags
+ + Implement libgpod and taglib
+ * Have more actions to perform on ipod
+   + Recursive adding of files/directories
+   * kdialog/xdialog/zenity interface
+   + Option to display information while syncing
+ + Have a stat file for stats on the ipod
+ * Test on FreeBSD
+ * Port to Mac
+ + Stop crashing when trying to delete a readonly file
+ + If the specified IPOD_DIR has no iTunesDB, create one
+ + Support IPOD_MOUNTPOINT environment variable aswell
+ + Reduce archive size (look at other FUSE project's configure.ac)
+ * Filters
+   * Certian genre's have bookmark switched on in iTunesDB
+ * Extended Attributes
+   + tags
+   + iPod stats (Playcount...)
+   * Change tags
+ + Finding mountpoint: If /proc/mounts doesn't exist, try /etc/mtab
+ * Video, photo and cd cover support
+ * Fix find orphan files
+ + Work over samba

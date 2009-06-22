@@ -1,0 +1,91 @@
+.\" Process this file with
+.\" groff -man -Tascii fusepod.1
+.\"
+.TH fusepod 1 "FUSEPod 0.5" "iPod virtual filesystem"
+.SH NAME
+fusepod \- iPod virtual filesystem
+.SH SYNOPSIS
+.B fusepod [ options ] mountpoint
+.SH DESCRIPTION
+.B FUSEPod
+is a userspace virtual filesystem which mounts your iPod into a directory for
+easy browsing of your songs on your iPod.
+.SH USAGE
+
+To mount your ipod type at the console:
+.RS
+.br        
+.BI "fusepod" " mount_to"
+.RE
+        
+If
+.B FUSEPod
+fails to find your iPod you can specify the iPod's mountpoint
+through the environment variable
+.B IPOD_DIR.
+Note that the iPod must already be mounted so that you can read it.
+
+For example, say my iPod is mounted at
+.I /media/IPOD
+and I want to mount the
+.B FUSEPod
+layer at
+.I /home/keegan/ipod
+
+You would enter at the console:
+.RS
+.br
+.B IPOD_DIR="/media/IPOD" fusepod /home/keegan/ipod
+.RE
+
+You can also create the necessary files and directories for your iPod to
+work.
+.B FUSEPod
+will prompt you if you specify
+.B IPOD_DIR
+which does not have the necessary structure.
+
+To unmount FUSEPod type at the console:
+.RS
+.br
+.BI "fusermount -u" " mounted_to"
+.RE
+
+To add songs copy them too
+.RS
+.br
+.B [mounted_to]/Transfer
+.RE
+
+Or add the absolute path of the song to the file
+.RS
+.br
+.B [mounted_to]/add_songs
+.RE
+
+You can also add files and recusrively add directories through
+.RS
+.br
+.B [mounted_to]/add_files.sh [ files/directories ] ...
+.RE
+
+And then to sync the database and copy the files run
+.RS
+.br
+.B [mounted_to]/sync_ipod.sh [ -watch ]
+.RE
+
+You can the view all the songs that will be added to the iPod by
+viewing the files in the Transfer directory and the songs in the file
+.B add_songs.
+
+If you are happy with the contents of add_songs and the Transfer
+directory you can run the command:
+.RS
+.br
+.B ./sync_ipod.sh
+.RE
+
+.SH AUTHOR
+Keegan Carruthers-Smith <keegan.csmith@gmail.com>
+
