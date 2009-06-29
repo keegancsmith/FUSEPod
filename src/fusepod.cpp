@@ -713,7 +713,7 @@ void * fusepod_init () {
     sync_script += "    stats='" + fuse_mount_point + "/" + filename_stats + "'\n";
     sync_script += "    initial=$(grep 'Track Count' \"$stats\" | cut -b 14-)\n";
     sync_script += "    count=$(grep -c '^.*$' '" + fuse_mount_point + "/" + filename_add + "')\n";
-    sync_script += "    touch " + fuse_mount_point + "/" + filename_sync_do + " >& /dev/null &\n";
+    sync_script += "    touch " + fuse_mount_point + "/" + filename_sync_do + " >/dev/null 2>&1 &\n";
     sync_script += "    sleep 0.2\n";
     sync_script += "    while [ 1 ]; do\n";
     sync_script += "        current=$(grep 'Track Count' \"$stats\" | cut -b 14-)\n";
@@ -721,7 +721,7 @@ void * fusepod_init () {
     sync_script += "        if [ $? != 0 ]; then break; fi\n";
     sync_script += "        clear && echo $file && echo Track $[$current-$initial] of \"$count\" && sleep 0.2\n";
     sync_script += "    done\n";
-    sync_script += "elif [ $# = 0 ]; then touch " + fuse_mount_point + "/" + filename_sync_do + " >& /dev/null\n";
+    sync_script += "elif [ $# = 0 ]; then touch " + fuse_mount_point + "/" + filename_sync_do + " >/dev/null 2>&1\n";
     sync_script += "else echo USAGE: $0 '[ -watch ]'\n";
     sync_script += "fi\n";
     sync_script += "echo Finished syncing iPod\n";
