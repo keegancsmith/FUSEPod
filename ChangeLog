@@ -1,3 +1,8 @@
+2009-06-30  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
+
+	* configure.ac: Use FUSE_CPPFLAGS instead of FUSE_CFLAGS. Patch by
+	Max Kohn.
+
 2007-07-02    <keegan.csmith@gmail.com>
 
 	* src/fusepod.cpp: Fixed st_nlink problem, which intern fixes samba problems.
