@@ -1,0 +1,8 @@
+syntax: glob
+Makefile
+autom4te.cache
+config.log
+config.status
+src/.deps
+*.o
+src/fusepod
