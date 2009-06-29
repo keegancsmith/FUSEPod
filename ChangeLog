@@ -1,9 +1,5 @@
-2009-06-30  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
-
-	* src/fusepod_util.h: include cstring for strcasecmp.
-
-	* configure.ac: Use FUSE_CPPFLAGS instead of FUSE_CFLAGS. Patch by
-	Max Kohn.
+See revision history at http://bitbucket.org/keegan_csmith/fusepod/
+This file is no longer updated!
 
 2007-07-02    <keegan.csmith@gmail.com>
 
@@ -42,7 +38,7 @@
 	Removed master playlist from Playlist Count
 	If reading /proc/mounts fails, tries to read /etc/mtab
 
-	* src/fusepod.cpp: Fixed bug with getenv("HOME") when reading config files. 
+	* src/fusepod.cpp: Fixed bug with getenv("HOME") when reading config files.
 	Allows IPOD_MOUNTPOINT variable if IPOD_DIR is not specified. (GTKPod uses IPOD_MOUNTPOINT)
 	Tracks have extended attributes showing their tags
 
