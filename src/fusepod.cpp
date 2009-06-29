@@ -185,6 +185,9 @@ static int fusepod_readdir (const char *path, void *buf, fuse_fill_dir_t filler,
     if (tn == 0 || (tn->value.mode & S_IFREG))
         return -ENOENT;
 
+    filler(buf, ".", 0, 0);
+    filler(buf, "..", 0, 0);
+
     for (Node::iterator i = tn->begin (); i != tn->end (); ++i)
         filler (buf, (*i)->value.text, 0, 0);
 
