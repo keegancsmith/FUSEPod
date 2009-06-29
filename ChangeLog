@@ -1,5 +1,7 @@
 2009-06-30  Keegan Carruthers-Smith  <keegan.csmith@gmail.com>
 
+	* src/fusepod_util.h: include cstring for strcasecmp.
+
 	* configure.ac: Use FUSE_CPPFLAGS instead of FUSE_CFLAGS. Patch by
 	Max Kohn.
 
