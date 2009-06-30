@@ -748,14 +748,11 @@ void * fusepod_init () {
     NodeValue stats (fusepod_get_string (filename_stats.c_str ()), S_IFREG | 0444);
     fusepod->root->addChild (stats);
 
-    /* Remove existing transfer directory the lazy way :) */
-    string transfer_dir = fusepod->mount_point + "/" + dir_transfer_ipod;
-    system (("rm -rf '" + transfer_dir + "'").c_str ());
-
     /* Add transfer directory */
-    if (!mkdir (transfer_dir.c_str (), S_IFDIR | 0777)) {
-        NodeValue transfer (fusepod_get_string (dir_transfer.c_str ()), S_IFDIR | 0777);
-        fusepod->root->addChild (transfer);
+    string transfer_dir = fusepod->mount_point + "/" + dir_transfer_ipod;
+    if (!mkdir(transfer_dir.c_str(), S_IFDIR | 0777) || errno == EEXIST) {
+        NodeValue transfer(fusepod_get_string(dir_transfer.c_str()), S_IFDIR | 0777);
+        fusepod->root->addChild(transfer);
     }
 
     cout << "Starting FUSE layer" << endl;
@@ -773,9 +770,6 @@ static void fusepod_destroy (void * v) {
 
     if (fusepod)
     	delete fusepod;
-
-    string transfer_dir = mount_point + "/" + dir_transfer_ipod;
-    system (("rm -rf '" + transfer_dir + "'").c_str ());
 }
 
 static struct fuse_operations fusepod_oper;
