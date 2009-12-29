@@ -11,7 +11,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
- 
+
 extern "C" {
 #ifdef linux
 /* For pread()/pwrite() */
@@ -120,7 +120,7 @@ static void transfer_remove_empty_dirs (Node * node, const string & path, bool c
 /** Returns fusepod->get_statistics with syncing info */
 static string fusepod_get_stats () {
     if (syncing) /* Add syncing stats */
-        return fusepod->get_statistics () + 
+        return fusepod->get_statistics () +
             "Currently Syncing: " + currently_syncing + "\n";
     else
         return fusepod->get_statistics ();
@@ -165,15 +165,15 @@ static int fusepod_getattr (const char *path, struct stat *stbuf) {
 
 static int fusepod_access (const char *path, int mask) {
     int res;
-    
+
     struct stat st;
     res = fusepod_getattr (path, &st);
     if (res != 0)
         return res;
-    
+
     if ((st.st_mode | mask) != st.st_mode)
         return -EROFS;
-    
+
     return 0;
 }
 
@@ -213,10 +213,10 @@ static int fusepod_open(const char *path, struct fuse_file_info *fi) {
     int res = open(realpath.c_str(), fi->flags);
     if (res == -1)
         return -errno;
-    
+
     fi->fh = res;
     close (res);
-    
+
     return 0;
 }
 
@@ -266,7 +266,7 @@ static int fusepod_write (const char *path, const char *buf, size_t size, off_t 
 static int fusepod_read_string (const string & str, char *buf, size_t size, off_t offset) {
     if (offset >= str.length ())
         return -EINVAL;
-    
+
     int bytes_read = min ((int) (str.length () - offset), (int) size);
     memcpy (buf, &(str.c_str ()[offset]), bytes_read);
     return bytes_read;
@@ -308,7 +308,7 @@ static int fusepod_read (const char *path, char *buf, size_t size, off_t offset,
     fd = open(realpath.c_str(), O_RDONLY);
     if (fd == -1)
         return -errno;
-    
+
     res = pread(fd, buf, size, offset);
     if (res == -1)
         res = -errno;
@@ -331,7 +331,7 @@ static int fusepod_mknod (const char * path, mode_t mode, dev_t dev) {
 
             struct stat st;
             stat (path.c_str (), &st);
-            
+
             if (S_ISREG(st.st_mode)) {
                 cout << "Adding track " << path << "... ";
                 currently_syncing = path;
@@ -409,7 +409,7 @@ static int fusepod_mkdir (const char * path, mode_t mode) {
         return -EACCES;
 
     string realpath = fusepod->get_transfer_path (path);
-    
+
     if (mkdir (realpath.c_str(), S_IFDIR | 0777))
         return -errno;
 
@@ -430,7 +430,7 @@ static int fusepod_rmdir (const char * path) {
 
     //User can only remove directories in playlist or transfer directories
     if (node->parent && dir_playlists == node->parent->value.text) {
-        
+
         fusepod->remove_playlist (string (node->value.text));
 
     }
@@ -444,7 +444,7 @@ static int fusepod_rmdir (const char * path) {
 
         if (rmdir (fusepod->get_transfer_path (path).c_str()))
             return -errno;
-        
+
         node->remove_from_parent ();
 
         free ((void*)node->value.text);
@@ -497,17 +497,17 @@ static int fusepod_listxattr (const char * path, char * attrs, size_t size) {
     for (int i = 0; i < XATTRS_LEN; i++) {
         if (i < XATTRS_NUM && !xattrs [i][1])
             continue;
-        
+
         size_t len = strlen ((char*)xattrs [i][0]) + 1;
-            
+
         if (size == 0) {
             count += len;
-            continue; 
+            continue;
         }
 
         if (len > size + pos)
             return -ERANGE;
-        
+
         memcpy (attrs + pos, xattrs [i][0], len);
         pos += len;
     }
@@ -551,7 +551,7 @@ static int fusepod_getxattr (const char * path, const char * attr, char * buf, s
             if (i >= XATTRS_NUM) delete val;
             return len;
         }
-            
+
         if (len > size) {
             if (i >= XATTRS_NUM) delete val;
             return -ERANGE;
@@ -617,7 +617,7 @@ static int fusepod_release (const char * path, struct fuse_file_info * info) {
         cout << "Successful" << endl;
     else
         cout << "Failed" << endl;
-    
+
     transfer_remove (path);
 
     if (track)
@@ -651,10 +651,10 @@ static vector<string> get_string_desc () {
     if (getenv ("HOME")) {
         string home = getenv ("HOME");
         home += "/.fusepod";
-        
+
         struct stat st;
         stat (home.c_str (), &st);
-        
+
         if (!S_ISREG(st.st_mode))
             write_default_config ();
 
@@ -764,12 +764,13 @@ static void fusepod_destroy (void * v) {
     cout << "Cleaning up" << endl;
 
     if (add_songs)
-        remove (add_songs);
-
-    string mount_point = fusepod->mount_point;
+        remove(add_songs);
 
     if (fusepod)
-    	delete fusepod;
+        delete fusepod;
+
+    add_songs = 0;
+    fuspod = 0;
 }
 
 static struct fuse_operations fusepod_oper;
@@ -813,7 +814,7 @@ int main (int argc, char **argv) {
             access ( (string (ipod_dir) + ITUNESDB_PATH).c_str (), F_OK ) != 0) { // Checks for itunesdb
             cerr << "ERROR: Cannot find the iTunesDB in the directory specified by the IPOD_DIR or IPOD_MOUNTPOINT environment variable.\n";
             cerr << "Do you want to create the iTunesDB in the specified directory? (y/n): ";
-            
+
             char ans;
             cin >> ans;
             if (ans != 'y') {
