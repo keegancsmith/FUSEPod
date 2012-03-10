@@ -770,7 +770,7 @@ static void fusepod_destroy (void * v) {
         delete fusepod;
 
     add_songs = 0;
-    fuspod = 0;
+    fusepod = 0;
 }
 
 static struct fuse_operations fusepod_oper;

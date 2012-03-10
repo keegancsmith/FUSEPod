@@ -14,6 +14,7 @@
  
 #include "fusepod_util.h"
 
+#include <stdio.h>
 #include <cstring>
 #include <set>
 
