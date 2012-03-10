@@ -461,13 +461,25 @@ string FUSEPod::get_track_val (Track * track, char symbol) {
             if (track->artist)
                 val = track->artist;
             break;
+        case 'c': // Artist without compilations
+            if (track->compilation) {
+		    val = "Compilations"; 
+	    } else {
+		if (track->artist) 
+		    val = track->artist;
+	    }		
+            break;
         case 'A': // Album
             if (track->album)
                 val = track->album;
             break;
         case 't': // Title
-            if (track->title)
-                val = track->title;
+            if (track->compilation) {
+		    val = string(track->artist) + " - " + string(track->title); //Is it works? 
+	    } else {
+		if (track->title)
+		    val = track->title;
+	    }		
             break;
         case 'g': // Genre
             if (track->genre)
