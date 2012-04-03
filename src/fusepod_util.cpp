@@ -11,7 +11,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
- 
+
 #include "fusepod_util.h"
 
 #include <stdio.h>
@@ -26,12 +26,12 @@ void fusepod_replace_reserved_chars (std::string & ret) {
             ret [i] = '_';
 }
 
-string fusepod_strip_string (const string & s) {
-    unsigned int l = s.find_first_not_of (" \t\n\r");
+string fusepod_strip_string(const string & s) {
+    unsigned int l = s.find_first_not_of(" \t\n\r");
     if (l == string::npos)
         return "";
-    int r = s.find_first_not_of (" \t\n\r");
-    return s.substr (l, s.length () - r);
+    int r = s.find_last_not_of(" \t\n\r");
+    return s.substr(l, r - l + 1);
 }
 
 string fusepod_check_string (const string & s, const string & unknown) {
@@ -69,7 +69,7 @@ vector<char*> fusepod_split_path (char * s, char c) {
 bool fusepod_starts_with (const char * s, const char * prefix) {
     const char *s1 = s - 1;
     const char *p1 = prefix - 1;
-    
+
     while (*(++s1) == *(++p1) && *s1);
 
     return *p1 == 0;
