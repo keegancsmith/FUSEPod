@@ -264,7 +264,7 @@ static int fusepod_write (const char *path, const char *buf, size_t size, off_t 
 }
 
 static int fusepod_read_string (const string & str, char *buf, size_t size, off_t offset) {
-    if (offset >= str.length ())
+    if (offset >= (off_t)str.length())
         return -EINVAL;
 
     int bytes_read = min ((int) (str.length () - offset), (int) size);
@@ -345,7 +345,7 @@ static int fusepod_mknod (const char * path, mode_t mode, dev_t dev) {
         in.close ();
 
         /* Empty add_songs file */
-        truncate (add_songs, 0);
+        truncate(add_songs, 0);
 
         /* Recursively add songs in transfer */
         /*string transfer_path = "/" + dir_transfer;
@@ -695,7 +695,7 @@ void * fusepod_init () {
 
     /* These are special extensions to the filesystem for adding songs to the iPod*/
     add_songs = strdup ("/tmp/fusepodXXXXXX");
-    mkstemp (add_songs);
+    mkstemp(add_songs);
 
     /* Create an empty temp file for add_songs */
     mknod (add_songs, S_IFREG | 0666, 0);

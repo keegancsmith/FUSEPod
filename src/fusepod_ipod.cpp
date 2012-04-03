@@ -667,7 +667,7 @@ void FUSEPod::add_orphaned_tracks () {
     struct dirent * dir_ent;
 
     // Now traverse the Music directory looking at each mp3
-    while (dir_ent = readdir (music)) {
+    while ((dir_ent = readdir(music))) {
         if (strcmp(dir_ent->d_name, ".")  == 0 ||
             strcmp(dir_ent->d_name, "..") == 0)
             continue;
@@ -681,7 +681,7 @@ void FUSEPod::add_orphaned_tracks () {
         
         // These files should be mp3s in the db. If they are not in files_in_itdb,
         // the song gets added to the database.
-        while (subdir_ent = readdir (subdir)) {
+        while ((subdir_ent = readdir(subdir))) {
             if (strcmp(subdir_ent->d_name, ".")  == 0 ||
                 strcmp(subdir_ent->d_name, "..") == 0)
                 continue;
@@ -712,14 +712,14 @@ bool FUSEPod::move_file (const string & path, Track * track) {
     //Find a directory that exists from dirnum -> end
     for (int i = dirnum; i < musicdirs && !found; i++) {
         sprintf (tmp, "%s%02d", subdir.c_str(), i);
-        if (found = !stat (tmp, &st))
+        if ((found = !stat(tmp, &st)))
             dirnum = i;
     }
 
     //Find a directory that exists from 0 -> dirnum
     for (int i = 0; i < dirnum && !found; i++) {
         sprintf (tmp, "%s%02d", subdir.c_str(), i);
-        if (found = !stat (tmp, &st))
+        if ((found = !stat(tmp, &st)))
             dirnum = i;
     }
 
