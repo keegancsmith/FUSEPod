@@ -11,7 +11,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
- 
+
 #ifndef _FUSEPOD_CONSTANTS_H_
 #define _FUSEPOD_CONSTANTS_H_
 
@@ -20,8 +20,11 @@ extern "C" {
 }
 #include <string>
 
-const mode_t MODE_DIR = (S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP | S_IXOTH);
+const mode_t MODE_DIR = (S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR |
+                         S_IXGRP | S_IXOTH);
 const mode_t MODE_FILE = (S_IFREG | S_IRUSR | S_IRGRP | S_IROTH);
+
+const std::string kRealMountpointPrefix = "Real Mountpoint: ";
 
 const std::string filename_add = "add_songs";
 const std::string filename_add_files = "add_files.sh";
