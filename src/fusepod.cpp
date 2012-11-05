@@ -345,14 +345,15 @@ static int fusepod_mknod (const char * path, mode_t mode, dev_t dev) {
         in.close ();
 
         /* Empty add_songs file */
-        truncate(add_songs, 0);
+        if (truncate(add_songs, 0))
+            cout << "Failed to empty add_songs file" << endl;
 
         /* Recursively add songs in transfer */
         /*string transfer_path = "/" + dir_transfer;
-        Node * transfer_node = fusepod->get_node ( ("/" + dir_transfer).c_str() );
+        Node * transfer_node = fusepod->get_node(("/" + dir_transfer).c_str());
 
-        transfer_add_songs (transfer_node, transfer_path);
-        transfer_remove_empty_dirs (transfer_node, transfer_path, false);*/
+        transfer_add_songs(transfer_node, transfer_path);
+        transfer_remove_empty_dirs(transfer_node, transfer_path, false);*/
 
         currently_syncing = "iTunesDB";
         cout << "Syncing database... ";
@@ -693,9 +694,12 @@ void * fusepod_init () {
     fusepod = new FUSEPod (ipod_mount_point, pd);
     cout << "Finished reading iPod" << endl;
 
-    /* These are special extensions to the filesystem for adding songs to the iPod*/
-    add_songs = strdup ("/tmp/fusepodXXXXXX");
-    mkstemp(add_songs);
+    /* These are special extensions to the filesystem for adding songs to the
+     * iPod */
+    add_songs = strdup("/tmp/fusepodXXXXXX");
+    if (mkstemp(add_songs) == -1) {
+        cout << "Could not create tmp file for add_songs" << endl;
+    }
 
     /* Create an empty temp file for add_songs */
     mknod (add_songs, S_IFREG | 0666, 0);
