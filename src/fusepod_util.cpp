@@ -20,13 +20,15 @@
 
 static std::set<const char*, ltcasestr> fusepod_strings;
 
-void fusepod_replace_reserved_chars (std::string & ret) {
-    for (unsigned int i = 0; i < ret.size (); i++)
-        if (ret [i] == '/' || ret [i] == '~')
-            ret [i] = '_';
+void fusepod_replace_reserved_chars(std::string &ret) {
+    for (unsigned int i = 0; i < ret.size(); i++) {
+        if (ret[i] == '/' || ret[i] == '~') {
+            ret[i] = '_';
+        }
+    }
 }
 
-string fusepod_strip_string(const string & s) {
+string fusepod_strip_string(const string &s) {
     size_t l = s.find_first_not_of(" \t\n\r");
     if (l == string::npos)
         return "";
@@ -34,39 +36,40 @@ string fusepod_strip_string(const string & s) {
     return s.substr(l, r + 1 - l);
 }
 
-string fusepod_check_string (const string & s, const string & unknown) {
-    string ret = fusepod_strip_string (s);
+string fusepod_check_string(const string &s, const string &unknown) {
+    string ret = fusepod_strip_string(s);
     if (ret == "")
         return unknown;
-    fusepod_replace_reserved_chars (ret);
+    fusepod_replace_reserved_chars(ret);
     return ret;
 }
 
-const char * fusepod_get_string (const char * s) {
-    std::set<const char*, ltcasestr>::iterator i = fusepod_strings.find (s);
-    if (i == fusepod_strings.end ()) {
-        fusepod_strings.insert (strdup (s));
-        return fusepod_get_string (s);
+const char *fusepod_get_string(const char *s) {
+    std::set<const char*, ltcasestr>::iterator i = fusepod_strings.find(s);
+    if (i == fusepod_strings.end()) {
+        fusepod_strings.insert(strdup(s));
+        return fusepod_get_string(s);
     }
     return *i;
 }
 
-vector<char*> fusepod_split_path (char * s, char c) {
+vector<char*> fusepod_split_path(char *s, char c) {
     vector<char*> nodes;
     if (*s != c && *s != 0)
-        nodes.push_back (s);
+        nodes.push_back(s);
     while (*s) {
         if (*s == c) {
             *s = 0;
-            if (s[1] != 0)
-                nodes.push_back (&(s[1]));
+            if (s[1] != 0) {
+                nodes.push_back(&(s[1]));
+            }
         }
         ++s;
     }
     return nodes;
 }
 
-bool fusepod_starts_with (const char * s, const char * prefix) {
+bool fusepod_starts_with(const char *s, const char *prefix) {
     const char *s1 = s - 1;
     const char *p1 = prefix - 1;
 
@@ -75,9 +78,9 @@ bool fusepod_starts_with (const char * s, const char * prefix) {
     return *p1 == 0;
 }
 
-string fusepod_int_to_string (int i) {
-    char tmp [10];
+string fusepod_int_to_string(int i) {
+    char tmp[10];
     i %= 1000000000;
-    sprintf (tmp, "%d", i);
-    return string (tmp);
+    sprintf(tmp, "%d", i);
+    return string(tmp);
 }
