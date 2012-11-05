@@ -27,11 +27,11 @@ void fusepod_replace_reserved_chars (std::string & ret) {
 }
 
 string fusepod_strip_string(const string & s) {
-    unsigned int l = s.find_first_not_of(" \t\n\r");
+    size_t l = s.find_first_not_of(" \t\n\r");
     if (l == string::npos)
         return "";
-    int r = s.find_last_not_of(" \t\n\r");
-    return s.substr(l, r - l + 1);
+    size_t r = s.find_last_not_of(" \t\n\r");
+    return s.substr(l, r + 1 - l);
 }
 
 string fusepod_check_string (const string & s, const string & unknown) {
