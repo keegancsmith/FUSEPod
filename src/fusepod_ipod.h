@@ -15,9 +15,7 @@
 #ifndef _FUSEPOD_IPOD_H_
 #define _FUSEPOD_IPOD_H_
 
-extern "C" {
 #include <gpod/itdb.h>
-}
 
 #include <string>
 #include <cstring>
