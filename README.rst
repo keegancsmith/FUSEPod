@@ -48,6 +48,10 @@ To install the compile time dependencies on Ubuntu (tested on 12.10) run::
 
   $ sudo apt-get install libtag1-dev libgpod-dev libfuse-dev
 
+To install the compile time dependencies on Nix run::
+
+  $ nix-shell -p pkg-config fuse libgpod
+
 .. _FUSE: http://fuse.sourceforge.net/
 .. _TagLib http://taglib.github.com/
 
