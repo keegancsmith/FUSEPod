@@ -79,7 +79,7 @@ bool fusepod_starts_with(const char *s, const char *prefix) {
 }
 
 string fusepod_int_to_string(int i) {
-    char tmp[10];
+    char tmp[11];
     i %= 1000000000;
     sprintf(tmp, "%d", i);
     return string(tmp);

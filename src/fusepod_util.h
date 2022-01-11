@@ -26,7 +26,7 @@ using std::vector;
  * Function object which return compares 2 strings ignoring case.
  */
 struct ltcasestr {
-    bool operator()(const char *a, const char *b) {
+    bool operator()(const char *a, const char *b) const {
         return strcasecmp(a, b) < 0;
     }
 };

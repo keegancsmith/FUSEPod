@@ -52,7 +52,7 @@ struct NodeValue {
  */
 class Node {
     struct nodecomp {
-        bool operator()(const Node *a, const Node *b) {
+        bool operator()(const Node *a, const Node *b) const {
             return strcasecmp(a->value.text, b->value.text) < 0;
         }
     };
