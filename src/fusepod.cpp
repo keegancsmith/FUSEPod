@@ -549,19 +549,19 @@ static int fusepod_getxattr (const char * path, const char * attr, char * buf, s
         size_t len = strlen (val) + 1;
 
         if (size == 0) {
-            if (i >= XATTRS_NUM) delete val;
+            if (i >= XATTRS_NUM) delete[] val;
             return len;
         }
 
         if (len > size) {
-            if (i >= XATTRS_NUM) delete val;
+            if (i >= XATTRS_NUM) delete[] val;
             return -ERANGE;
         }
 
         strcpy (buf, val);
 
         if (i >= XATTRS_NUM)
-            delete val;
+            delete[] val;
 
         return len;
     }

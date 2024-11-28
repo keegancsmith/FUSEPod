@@ -745,7 +745,7 @@ bool FUSEPod::move_file(const string &path, Track *track) {
     }
 
     subdir = string(tmp) + "/fusepod";
-    delete tmp;
+    delete[] tmp;
 
     if (!found)
         return false;
@@ -766,10 +766,10 @@ bool FUSEPod::move_file(const string &path, Track *track) {
     sprintf(tmp, "%s/iPod_Control/Music/F%02d/fusepod%06d.%s",
             mount_point.c_str(), dirnum, filenum, ext.c_str());
     if (rename(path.c_str(), tmp)) {
-        delete tmp;
+        delete[] tmp;
         return false;
     }
 
-    delete tmp;
+    delete[] tmp;
     return true;
 }
