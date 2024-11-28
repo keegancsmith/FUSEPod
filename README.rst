@@ -50,7 +50,7 @@ To install the compile time dependencies on Ubuntu (tested on 12.10) run::
 
 To install the compile time dependencies on Nix run::
 
-  $ nix-shell -p pkg-config fuse libgpod
+  $ nix-shell -p pkg-config fuse libgpod taglib
 
 .. _FUSE: http://fuse.sourceforge.net/
 .. _TagLib http://taglib.github.com/
