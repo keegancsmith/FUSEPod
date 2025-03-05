@@ -615,6 +615,8 @@ LIBOBJS
 taglib_LIBS
 taglib_CFLAGS
 TAGLIB_CONFIG
+GLIB_LIBS
+GLIB_CFLAGS
 libgpod_LIBS
 libgpod_CFLAGS
 FUSE_LIBS
@@ -730,6 +732,8 @@ FUSE_CFLAGS
 FUSE_LIBS
 libgpod_CFLAGS
 libgpod_LIBS
+GLIB_CFLAGS
+GLIB_LIBS
 taglib_CFLAGS
 taglib_LIBS'
 
@@ -1381,6 +1385,8 @@ Some influential environment variables:
               C compiler flags for libgpod, overriding pkg-config
   libgpod_LIBS
               linker flags for libgpod, overriding pkg-config
+  GLIB_CFLAGS C compiler flags for GLIB, overriding pkg-config
+  GLIB_LIBS   linker flags for GLIB, overriding pkg-config
   taglib_CFLAGS
               C compiler flags for taglib, overriding pkg-config
   taglib_LIBS linker flags for taglib, overriding pkg-config
@@ -3969,6 +3975,97 @@ printf "%s\n" "yes" >&6; }
 
 fi
 
+pkg_failed=no
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for glib-2.0" >&5
+printf %s "checking for glib-2.0... " >&6; }
+
+if test -n "$GLIB_CFLAGS"; then
+    pkg_cv_GLIB_CFLAGS="$GLIB_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"glib-2.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "glib-2.0") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_GLIB_CFLAGS=`$PKG_CONFIG --cflags "glib-2.0" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$GLIB_LIBS"; then
+    pkg_cv_GLIB_LIBS="$GLIB_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"glib-2.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "glib-2.0") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_GLIB_LIBS=`$PKG_CONFIG --libs "glib-2.0" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        GLIB_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "glib-2.0" 2>&1`
+        else
+	        GLIB_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "glib-2.0" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$GLIB_PKG_ERRORS" >&5
+
+	as_fn_error $? "Package requirements (glib-2.0) were not met:
+
+$GLIB_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables GLIB_CFLAGS
+and GLIB_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details." "$LINENO" 5
+elif test $pkg_failed = untried; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+	{ { printf "%s\n" "$as_me:${as_lineno-$LINENO}: error: in '$ac_pwd':" >&5
+printf "%s\n" "$as_me: error: in '$ac_pwd':" >&2;}
+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables GLIB_CFLAGS
+and GLIB_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
+See 'config.log' for more details" "$LINENO" 5; }
+else
+	GLIB_CFLAGS=$pkg_cv_GLIB_CFLAGS
+	GLIB_LIBS=$pkg_cv_GLIB_LIBS
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+printf "%s\n" "yes" >&6; }
+
+fi
+
 # Extract the first word of "taglib-config", so it can be a program name with args.
 set dummy taglib-config; ac_word=$2
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
@@ -4113,8 +4210,8 @@ else
     taglib_LIBS=`$TAGLIB_CONFIG --libs`
 fi
 
-CPPFLAGS="$CPPFLAGS -Wall -O2 -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=25 $FUSE_CFLAGS $libgpod_CFLAGS $taglib_CFLAGS"
-LIBS="$FUSE_LIBS $libgpod_LIBS $taglib_LIBS"
+CPPFLAGS="$CPPFLAGS -Wall -O2 -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=25 $FUSE_CFLAGS $libgpod_CFLAGS $taglib_CFLAGS $GLIB_CFLAGS"
+LIBS="$FUSE_LIBS $libgpod_LIBS $taglib_LIBS $GLIB_LIBS"
 
 ac_config_files="$ac_config_files Makefile src/Makefile man/Makefile"
 

@@ -7,6 +7,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 PKG_CHECK_MODULES(FUSE, [fuse >= 2.5])
 PKG_CHECK_MODULES(libgpod, [libgpod-1.0])
+PKG_CHECK_MODULES([GLIB], [glib-2.0])
 
 AC_PATH_PROG(TAGLIB_CONFIG, taglib-config, no)
 if test "x$TAGLIB_CONFIG" = "xno" ; then
@@ -16,10 +17,10 @@ else
     taglib_LIBS=[`$TAGLIB_CONFIG --libs`]
 fi
 
-CPPFLAGS="$CPPFLAGS -Wall -O2 -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=25 $FUSE_CFLAGS $libgpod_CFLAGS $taglib_CFLAGS"
-LIBS="$FUSE_LIBS $libgpod_LIBS $taglib_LIBS"
+CPPFLAGS="$CPPFLAGS -Wall -O2 -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=25 $FUSE_CFLAGS $libgpod_CFLAGS $taglib_CFLAGS $GLIB_CFLAGS"
+LIBS="$FUSE_LIBS $libgpod_LIBS $taglib_LIBS $GLIB_LIBS"
 
 AC_CONFIG_FILES([Makefile
-		src/Makefile
-	  	man/Makefile])
-AC_OUTPUT 
+    src/Makefile
+      man/Makefile])
+AC_OUTPUT
