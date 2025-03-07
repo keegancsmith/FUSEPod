@@ -1,9 +1,12 @@
 AC_INIT([fusepod], [0.5.2],
         [Keegan Carruthers-Smith <keegan.csmith@gmail.com>])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([1.13 -Wall -Werror foreign])
 
 AC_PROG_CXX
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+AC_PROG_CC
+AM_PROG_AR
+# Allow system to use its own PKG_CONFIG_PATH
+# export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 PKG_CHECK_MODULES(FUSE, [fuse >= 2.5])
 PKG_CHECK_MODULES(libgpod, [libgpod-1.0])

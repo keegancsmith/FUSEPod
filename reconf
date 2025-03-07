@@ -1,6 +1,14 @@
 #!/bin/sh
+set -e
+
+# Clean any previous configuration
 rm -f config.cache
+rm -rf autom4te.cache
+
+# Generate configuration
 aclocal
 autoconf
-automake -a
-exit 
+automake --add-missing --copy
+
+echo "Configuration completed successfully"
+exit 0
