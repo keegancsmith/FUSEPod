@@ -5,3 +5,4 @@ config.status
 src/.deps
 *.o
 src/fusepod
+*~
